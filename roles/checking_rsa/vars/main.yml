@@ -1,0 +1,6 @@
+---
+# vars file for checking_auth
+num_keys: 4
+key1: roles/checking_rsa/files/afa_rsa.pub
+key2: roles/checking_rsa/files/afa2_rsa.pub
+key3: roles/checking_rsa/files/afa3_rsa.pub

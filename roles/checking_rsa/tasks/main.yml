@@ -1,0 +1,24 @@
+- name: Checking authorized keys in file authorized_keys
+  ansible.posix.authorized_key:
+    user: root
+    state: present
+    #state: absent
+    path: /root/.ssh/authorized_keys
+    key: '{{ item }}'
+  with_file:
+    - "{{ key1 }}"
+    - "{{ key2 }}"
+    - "{{ key3 }}"
+  register: checking_auth
+
+- name: Count authorized_keys in Server
+  ansible.builtin.shell:
+    cmd: "cat /root/.ssh/authorized_keys |grep -vce ^# 2>&- "
+  register: count_key
+
+- name: Checking how many keys
+  ansible.builtin.debug:
+    msg: "This server has {{ count_key.stdout }} keys"
+  when: count_key.stdout | int > num_keys
+
+

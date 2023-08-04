@@ -1,0 +1,7 @@
+---
+- name: Checking authorized keys in file authorized_keys
+  hosts: all
+  remote_user: root
+  gather_facts: no
+  roles:
+    - checking_rsa
